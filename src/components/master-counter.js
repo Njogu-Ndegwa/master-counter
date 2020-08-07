@@ -3,37 +3,54 @@ import Counter from './counter';
 
 export default function MasterCounter () {
 
-    const [counter, setCounter] = useState(0);
+    const [counterA, setCounterA] = useState(0);
+    const [counterB, setCounterB] = useState(0);
 
     const handleIncrementA = () => {
-        setCounter(counter + 1);
+        setCounterA(counterA + 1);
     }
 
     const handleDecrementA = () => {
-        setCounter(counter - 1);
+        setCounterA(counterA - 1);
 
     }
 
     const handleIncrementB = () => {
-        setCounter(counter + 1);
+        setCounterB(counterB + 1);
     }
 
     const handleDecrementB = () => {
-        setCounter(counter - 1);
+        setCounterB(counterB - 1);
 
     }
+
+    const handleIncrementAll = () => {
+        setCounterA(counterA + 1);
+ 
+        setCounterB(counterB + 1);
+
+    }
+
+    const handleDecrementAll = () => {
+        setCounterA(counterA - 1);
+
+        setCounterB(counterB - 1);
+
+    }
+  
 
     return (
         <div>
             <Counter 
             onIncrement={handleIncrementA} 
             onDecrement={handleDecrementA} 
-            counter={counter} />
+            counter={counterA} />
             <Counter 
             onIncrement={handleIncrementB} 
             onDecrement={handleDecrementB} 
-            counter={counter} />
-            <Counter/>
+            counter={counterB} />
+            {/* <Counter/> */}
+            <span><button onClick={handleDecrementAll} >- all</button> <button onClick ={handleIncrementAll} >+ all</button></span>
         </div>
     )
 }
