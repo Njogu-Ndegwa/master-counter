@@ -1,18 +1,18 @@
 import React from 'react';
 
-export default function Counter ({onIncrement, onDecrement, counter}) {
+export default function Counter ({onIncrement, onDecrement, counter, index}) {
     // const [counter, setCounter] = useState(0);
 
     const handleIncrement = (e) => {
         e.preventDefault()
         // setCounter(counter + 1)
-        onIncrement()
+        onIncrement(index)
     }
 
     const handleDecrement = (e) => {
         e.preventDefault()
         // setCounter(counter - 1)
-        onDecrement()
+        onDecrement(index)
     }
     return (
         <div>

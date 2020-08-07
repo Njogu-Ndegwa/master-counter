@@ -1,56 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Counter from './counter';
 
-export default function MasterCounter () {
+export default class MasterCounter extends React.Component {
 
-    const [counterA, setCounterA] = useState(0);
-    const [counterB, setCounterB] = useState(0);
-
-    const handleIncrementA = () => {
-        setCounterA(counterA + 1);
+    state = {
+        counter1: 0,
+        counter2: 0,
+        counter3: 0
     }
 
-    const handleDecrementA = () => {
-        setCounterA(counterA - 1);
-
+    handleIncrement = (index) => {
+        const count = `counter${index}`
+        this.setState({[count]: this.state[count] + 1});
     }
 
-    const handleIncrementB = () => {
-        setCounterB(counterB + 1);
+
+    handleDecrement = (index) => {
+        const count = `counter${index}`
+        this.setState({[count] : this.state[count] - 1})
+        
     }
 
-    const handleDecrementB = () => {
-        setCounterB(counterB - 1);
-
+    handleIncrementAll = () => {
+        for(let index = 1; index < 3; index++) {
+            this.handleIncrement(index);
+        }
     }
 
-    const handleIncrementAll = () => {
-        setCounterA(counterA + 1);
- 
-        setCounterB(counterB + 1);
-
+    handleDecrementAll = () => {
+        for (let index = 1; index < 3; index++) {
+            this.handleDecrement(index)
+        }
     }
 
-    const handleDecrementAll = () => {
-        setCounterA(counterA - 1);
-
-        setCounterB(counterB - 1);
-
-    }
-  
-
-    return (
-        <div>
+    render() {
+        const {counter1, counter2, counter3} = this.state;
+        return (
+            <div>
             <Counter 
-            onIncrement={handleIncrementA} 
-            onDecrement={handleDecrementA} 
-            counter={counterA} />
+            onIncrement={this.handleIncrement} 
+            onDecrement={this.handleDecrement} 
+            counter={counter1}
+            index={1}
+            
+            />
             <Counter 
-            onIncrement={handleIncrementB} 
-            onDecrement={handleDecrementB} 
-            counter={counterB} />
-            {/* <Counter/> */}
-            <span><button onClick={handleDecrementAll} >- all</button> <button onClick ={handleIncrementAll} >+ all</button></span>
+            onIncrement={this.handleIncrement} 
+            onDecrement={this.handleDecrement} 
+            counter={counter2} 
+            index={2}
+            />
+            <Counter 
+            onIncrement={this.handleIncrement} 
+            onDecrement={this.handleDecrement} 
+            counter={counter3} 
+            index={3}
+            />
+            <span><button onClick={this.handleDecrementAll} >- all</button> <button onClick ={this.handleIncrementAll} >+ all</button></span>
         </div>
-    )
+        )
+    }
+
 }
